@@ -1,13 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { setPrincipal, setInterest, setYears } from '../actions/index';
 
 // Connect this component
 function InterestCalculator(props) {
   return (
     <form className="interest-calculator" onSubmit={e => e.preventDefault()}>
       <div className="form-group">
+      
         <label htmlFor="principal">Principal ($)</label>
-        <input type="number" id="principal" value={props.principal} min="0" />
+        <input 
+          type="number" 
+          id="principal" 
+          value={props.principal} 
+          min="0" 
+          onChange={(event) => 
+            props.dispatch(
+              setPrincipal( event.target.value )
+            )} />
       </div>
       <div className="form-group">
         <label htmlFor="interest">Interest rate (%)</label>
@@ -17,12 +27,25 @@ function InterestCalculator(props) {
           value={props.interest}
           min="0"
           max="100"
-          step="0.1"
+          step="0.1" 
+          onChange={(event) => 
+            props.dispatch(
+              setInterest( event.target.value )
+            )}
         />
       </div>
       <div className="form-group">
         <label htmlFor="years">Years</label>
-        <input type="number" id="years" value={props.years} min="0" max="100" />
+        <input 
+          type="number" 
+          id="years" 
+          value={props.years} 
+          min="0" 
+          max="100" 
+          onChange={(event) => 
+            props.dispatch(
+              setYears( event.target.value )
+            )} />
       </div>
       <div className="form-group">
         <label htmlFor="total">Total</label>
